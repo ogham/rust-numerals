@@ -22,15 +22,15 @@ impl Numeral {
 
     fn ascii_upper(&self) -> char {
         match *self {
-            I => 'I', V => 'V', X => 'X', L => 'L',
-            C => 'C', D => 'D', M => 'M',
+            I => 'I',  V => 'V',  X => 'X',  L => 'L',
+            C => 'C',  D => 'D',  M => 'M',
         }
     }
 
     fn ascii_lower(&self) -> char {
         match *self {
-            I => 'i', V => 'v', X => 'x', L => 'l',
-            C => 'c', D => 'd', M => 'm',
+            I => 'i',  V => 'v',  X => 'x',  L => 'l',
+            C => 'c',  D => 'd',  M => 'm',
         }
     }
 
@@ -102,15 +102,18 @@ impl From<i32> for Roman {
         assert!(number > 0);
         let mut vec = Vec::new();
 
-        for &(secondary, primary) in &[ (C, M), (C, D), (X, C), (X, L), (I, X), (I, V) ] {
+        for &(secondary, primary) in &[ (C, M), (C, D),
+                                        (X, C), (X, L),
+                                        (I, X), (I, V) ] {
+
             while number >= primary.value() {
                 number -= primary.value();
                 vec.push(primary);
             }
 
-            let also = primary.value() - secondary.value();
-            if number >= also {
-                number -= also;
+            let difference = primary.value() - secondary.value();
+            if number >= difference {
+                number -= difference;
                 vec.push(secondary);
                 vec.push(primary);
             }
