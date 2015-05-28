@@ -1,0 +1,4 @@
+[package]
+name = "numerals"
+version = "0.1.0"
+authors = ["Ben S <ogham@bsago.me>"]
