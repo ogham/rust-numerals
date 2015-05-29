@@ -1,3 +1,5 @@
+# rust-numerals [![Build Status](https://travis-ci.org/ogham/rust-numerals.svg?branch=master)](https://travis-ci.org/ogham/rust-numerals)
+
 This is a library for various numeric systems, including ancient, modern, and
 just plain strange.
 
