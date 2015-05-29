@@ -10,4 +10,4 @@ readme = "README.md"
 version = "0.1.0"
 
 [lib]
-name = "ansi_term"
+name = "numerals"
