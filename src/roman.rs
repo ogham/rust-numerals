@@ -79,7 +79,7 @@
 //! Limitations
 //! -----------
 //!
-//! - **The `Roman::from(i16)` method will **panic when given zero or a
+//! - The `Roman::from(i16)` method will **panic when given zero or a
 //!   negative number!** The Romans had the *concept* of zero, but no numeral
 //!   for, so it's not relevant here. Be sure to check your input values.
 //! - Similarly, there is no *common* way to handle numbers in the tens of
