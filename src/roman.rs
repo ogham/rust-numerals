@@ -56,7 +56,7 @@
 //! use numerals::roman::Numeral::{I, V, X};
 //! let input    = Roman::parse("XXVII").unwrap();
 //! let expected = Roman::from(vec![ X, X, V, I, I ]);
-//! assert_eq!(27, input);
+//! assert_eq!(expected, input);
 //! ```
 //!
 //!
