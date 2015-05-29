@@ -1,17 +1,107 @@
-
+//! [Ancient Roman numerals](https://en.wikipedia.org/wiki/Roman_numerals)
+//!
+//! This is a library for converting between computer integers, Roman
+//! numerals, and ASCII strings.
+//!
+//! Operations are done by converting your input into a `Roman` value, then
+//! calling methods on it. For example:
+//!
+//! ```rust
+//! use numerals::roman::Roman;
+//! let string = format!("{:X}", Roman::from(134));
+//! assert_eq!(string, "CXXXIV");
+//! ```
+//!
+//!
+//! Converting numbers to Roman
+//! ---------------------------
+//!
+//! The `From` method in `std::convert` can turn either an `i16` value, or a
+//! pre-existing `Vec` of `Numeral` objects, into a `Roman` object.
+//!
+//! ```rust
+//! use numerals::roman::Roman;
+//! use numerals::roman::Numeral::{I, V, X};
+//! let input    = Roman::from(27);
+//! let expected = Roman::from(vec![ X, X, V, I, I ]);
+//! assert_eq!(expected, input);
+//! ```
+//!
+//!
+//! Converting Roman to numbers
+//! ---------------------------
+//!
+//! The `value` method translates a sequence of numerals into their computer
+//! value equivalent.
+//!
+//! ```rust
+//! use numerals::roman::Roman;
+//! use numerals::roman::Numeral::{I, V, X};
+//! let input = Roman::from(vec![ X, X, V, I, I ]).value();
+//! assert_eq!(27, input);
+//! ```
+//!
+//!
+//! Converting strings to Roman
+//! ---------------------------
+//!
+//! You can translate an existing sequence of characters with the `parse`
+//! constructor, which scans an input string, returning `None` if it
+//! encounters a character with no Roman meaning.
+//!
+//! It accepts both uppercase and lowercase ASCII characters.
+//!
+//! ```rust
+//! use numerals::roman::Roman;
+//! use numerals::roman::Numeral::{I, V, X};
+//! let input    = Roman::parse("XXVII").unwrap();
+//! let expected = Roman::from(vec![ X, X, V, I, I ]);
+//! assert_eq!(27, input);
+//! ```
+//!
+//!
+//! Converting Roman to strings
+//! ---------------------------
+//!
+//! There are two ways to convert numerals into strings:
+//!
+//! - For uppercase, use the `UpperHex` trait, such as `{:X}`;
+//! - For lowercase, use the `LowerHex` trait, such as `{:x}`.
+//!
+//! ```rust
+//! use numerals::roman::Roman;
+//! use numerals::roman::Numeral::{I, V, X};
+//! let input = format!("{:X}", Roman::from(vec![ X, X, V, I, I ]));
+//! assert_eq!("XXVII", input);
+//! ```
+//!
+//!
+//! Limitations
+//! -----------
+//!
+//! - **The `Roman::from(i16)` method will **panic when given zero or a
+//!   negative number!** The Romans had the *concept* of zero, but no numeral
+//!   for, so it's not relevant here. Be sure to check your input values.
+//! - Similarly, there is no *common* way to handle numbers in the tens of
+//!   thousands, which is why this library uses `i16`-sized integers. Numbers
+//!   in the tens of thousands will work, but will be prefixed with many, many
+//!   `M`s.
 
 use std::convert::From;
 use std::fmt;
 
 use self::Numeral::*;
 
+/// An individual Roman numeral, without a given position.
 #[derive(PartialEq, Debug, Copy, Clone)]
 pub enum Numeral {
     I, V, X, L, C, D, M,
 }
 
 impl Numeral {
-    pub fn value(&self) -> i32 {
+    /// The value that this numeral is "worth". "Worth" is in scare quotes, as
+    /// the value can change depending on its position in the string.
+    pub fn value(&self) -> i16 {
         match *self {
             I =>    1,  V =>   5,
             X =>   10,  L =>  50,
@@ -34,6 +124,10 @@ impl Numeral {
         }
     }
 
+    /// Turn an individual character into its numeral equivalent, if there is
+    /// one. Returns `None` otherwise.
+    ///
+    /// This accepts either uppercase or lowercase ASCII characters.
     pub fn from_char(input: char) -> Option<Numeral> {
         match input {
             'I' | 'i' => Some(I),  'V' | 'v' => Some(V),
@@ -44,12 +138,19 @@ impl Numeral {
     }
 }
 
+/// A sequence of Roman numerals.
 #[derive(PartialEq, Debug)]
 pub struct Roman {
     numerals: Vec<Numeral>,
 }
 
 impl Roman {
+
+    /// Parses a string of characters into a sequence of numerals. Returns
+    /// `None` if there's a character in the input string that doesn't map to
+    /// a numeral.
+    ///
+    /// This accepts either uppercase or lowercase ASCII characters.
     pub fn parse(input: &str) -> Option<Roman> {
         let mut numerals = Vec::new();
 
@@ -63,7 +164,13 @@ impl Roman {
         Some(Roman { numerals: numerals })
     }
 
-    pub fn value(&self) -> i32 {
+    /// Converts this string of numerals into a `i32` actual number.
+    ///
+    /// ### Panics
+    ///
+    /// - This function panics when passed in a negative number or zero, as
+    ///   the Romans didn't have a way to write those down!
+    pub fn value(&self) -> i16 {
         let mut total = 0;
         let mut max = 0;
 
@@ -97,8 +204,14 @@ impl fmt::UpperHex for Roman {
     }
 }
 
-impl From<i32> for Roman {
-    fn from(mut number: i32) -> Roman {
+impl From<Vec<Numeral>> for Roman {
+    fn from(input: Vec<Numeral>) -> Roman {
+        Roman { numerals: input }
+    }
+}
+
+impl From<i16> for Roman {
+    fn from(mut number: i16) -> Roman {
         assert!(number > 0);
         let mut vec = Vec::new();
 

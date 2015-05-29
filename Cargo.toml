@@ -1,4 +1,13 @@
 [package]
 name = "numerals"
+description = "Library for numeric systems, both ancient and modern"
+
+authors = [ "ogham@bsago.me" ]
+documentation = "http://bsago.me/doc/numerals/"
+homepage = "https://github.com/ogham/rust-numerals"
+license = "MIT"
+readme = "README.md"
 version = "0.1.0"
-authors = ["Ben S <ogham@bsago.me>"]
+
+[lib]
+name = "ansi_term"
