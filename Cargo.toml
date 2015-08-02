@@ -3,7 +3,7 @@ name = "numerals"
 description = "Library for numeric systems, both ancient and modern"
 
 authors = [ "ogham@bsago.me" ]
-documentation = "http://bsago.me/doc/numerals/"
+documentation = "http://ogham.rustdocs.org/numerals/"
 homepage = "https://github.com/ogham/rust-numerals"
 license = "MIT"
 readme = "README.md"

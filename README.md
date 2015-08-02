@@ -6,7 +6,7 @@ just plain strange.
 Although the Roman module is likely to be the most popular, I maintain an
 interest in the others, so they're all packaged as one!
 
-### [View the Rustdoc](http://bsago.me/doc/numerals)
+### [View the Rustdoc](http://ogham.rustdocs.org/numerals/)
 
 
 ## Installation
