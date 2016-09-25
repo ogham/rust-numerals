@@ -3,11 +3,11 @@ name = "numerals"
 description = "Library for numeric systems, both ancient and modern"
 
 authors = [ "ogham@bsago.me" ]
-documentation = "http://ogham.rustdocs.org/numerals/"
+documentation = "https://docs.rs/numerals"
 homepage = "https://github.com/ogham/rust-numerals"
 license = "MIT"
 readme = "README.md"
-version = "0.1.0"
+version = "0.1.1"
 
 [lib]
 name = "numerals"
