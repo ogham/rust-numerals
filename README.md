@@ -1,4 +1,4 @@
-# rust-numerals [![Build Status](https://travis-ci.org/ogham/rust-numerals.svg?branch=master)](https://travis-ci.org/ogham/rust-numerals)
+# rust-numerals [![numerals on crates.io](http://meritbadge.herokuapp.com/numerals)](https://crates.io/crates/numerals) [![Build Status](https://travis-ci.org/ogham/rust-numerals.svg?branch=master)](https://travis-ci.org/ogham/rust-numerals)
 
 This is a library for various numeric systems, including ancient, modern, and
 just plain strange.
@@ -16,18 +16,14 @@ dependency in your `Cargo.toml`:
 
 ```toml
 [dependencies]
-numerals = "*"
-```
-
-or
-
-```toml
-[dependencies]
-git = "https://github.com/ogham/rust-numerals.git"
+numerals = "0.1"
 ```
 
 
 ## Roman
+
+To format a number as Roman numerals, use `Roman::from` to convert it, and the
+`UpperHex` formatting trait to format it.
 
 ```rust
 use numerals::roman::Roman;
