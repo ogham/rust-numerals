@@ -4,9 +4,9 @@
 //! numerals, and ASCII strings.
 //!
 //! Operations are done by converting your input into a `Roman` value, then
-//! calling methods on it. For example:
+//! calling functions on it. For example:
 //!
-//! ```rust
+//! ```
 //! use numerals::roman::Roman;
 //!
 //! let string = format!("{:X}", Roman::from(134));
@@ -17,10 +17,10 @@
 //! Converting numbers to Roman
 //! ---------------------------
 //!
-//! The `From` method in `std::convert` can turn either an `i16` value, or a
-//! pre-existing `Vec` of `Numeral` objects, into a `Roman` object.
+//! The `From` function in `std::convert` can turn either an `i16`, or a
+//! vector of `Numeral` values, into a `Roman` value.
 //!
-//! ```rust
+//! ```
 //! use numerals::roman::{Roman, Numeral::{I, V, X}};
 //!
 //! let input    = Roman::from(27);
@@ -32,10 +32,10 @@
 //! Converting Roman to numbers
 //! ---------------------------
 //!
-//! The `value` method translates a sequence of numerals into their computer
+//! The `value` function translates a sequence of numerals into their computer
 //! value equivalent.
 //!
-//! ```rust
+//! ```
 //! use numerals::roman::{Roman, Numeral::{I, V, X}};
 //!
 //! let input = Roman::from(vec![ X, X, V, I, I ]).value();
@@ -52,7 +52,7 @@
 //!
 //! It accepts both uppercase and lowercase ASCII characters.
 //!
-//! ```rust
+//! ```
 //! use numerals::roman::{Roman, Numeral::{I, V, X}};
 //!
 //! let input    = Roman::parse("XXVII").unwrap();
@@ -66,10 +66,10 @@
 //!
 //! There are two ways to convert numerals into strings:
 //!
-//! - For uppercase, use the `UpperHex` trait, such as `{:X}`;
-//! - For lowercase, use the `LowerHex` trait, such as `{:x}`.
+//! - For uppercase, use the `UpperHex` trait with the `{:X}` format string.
+//! - For lowercase, use the `LowerHex` trait with the `{:x}` format string.
 //!
-//! ```rust
+//! ```
 //! use numerals::roman::{Roman, Numeral::{I, V, X}};
 //!
 //! let input = format!("{:X}", Roman::from(vec![ X, X, V, I, I ]));
@@ -80,9 +80,9 @@
 //! Limitations
 //! -----------
 //!
-//! - The `Roman::from(i16)` method will **panic when given zero or a
+//! - The `Roman::from(i16)` function will **panic when given zero or a
 //!   negative number!** The Romans had the *concept* of zero, but no numeral
-//!   for, so it’s not relevant here. Be sure to check your input values.
+//!   for it, so it’s not relevant here. Be sure to check your input values.
 //! - Similarly, there is no *common* way to handle numbers in the tens of
 //!   thousands, which is why this library uses `i16`-sized integers. Numbers
 //!   in the tens of thousands will work, but will be prefixed with many, many
@@ -169,7 +169,7 @@ impl Roman {
 
     /// Converts this string of numerals into a `i32` actual number.
     ///
-    /// ### Panics
+    /// # Panics
     ///
     /// - This function panics when passed in a negative number or zero, as
     ///   the Romans didn’t have a way to write those down!
