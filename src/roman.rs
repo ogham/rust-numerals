@@ -8,6 +8,7 @@
 //!
 //! ```rust
 //! use numerals::roman::Roman;
+//!
 //! let string = format!("{:X}", Roman::from(134));
 //! assert_eq!(string, "CXXXIV");
 //! ```
@@ -20,8 +21,8 @@
 //! pre-existing `Vec` of `Numeral` objects, into a `Roman` object.
 //!
 //! ```rust
-//! use numerals::roman::Roman;
-//! use numerals::roman::Numeral::{I, V, X};
+//! use numerals::roman::{Roman, Numeral::{I, V, X}};
+//!
 //! let input    = Roman::from(27);
 //! let expected = Roman::from(vec![ X, X, V, I, I ]);
 //! assert_eq!(expected, input);
@@ -35,8 +36,8 @@
 //! value equivalent.
 //!
 //! ```rust
-//! use numerals::roman::Roman;
-//! use numerals::roman::Numeral::{I, V, X};
+//! use numerals::roman::{Roman, Numeral::{I, V, X}};
+//!
 //! let input = Roman::from(vec![ X, X, V, I, I ]).value();
 //! assert_eq!(27, input);
 //! ```
@@ -52,8 +53,8 @@
 //! It accepts both uppercase and lowercase ASCII characters.
 //!
 //! ```rust
-//! use numerals::roman::Roman;
-//! use numerals::roman::Numeral::{I, V, X};
+//! use numerals::roman::{Roman, Numeral::{I, V, X}};
+//!
 //! let input    = Roman::parse("XXVII").unwrap();
 //! let expected = Roman::from(vec![ X, X, V, I, I ]);
 //! assert_eq!(expected, input);
@@ -69,8 +70,8 @@
 //! - For lowercase, use the `LowerHex` trait, such as `{:x}`.
 //!
 //! ```rust
-//! use numerals::roman::Roman;
-//! use numerals::roman::Numeral::{I, V, X};
+//! use numerals::roman::{Roman, Numeral::{I, V, X}};
+//!
 //! let input = format!("{:X}", Roman::from(vec![ X, X, V, I, I ]));
 //! assert_eq!("XXVII", input);
 //! ```
@@ -81,7 +82,7 @@
 //!
 //! - The `Roman::from(i16)` method will **panic when given zero or a
 //!   negative number!** The Romans had the *concept* of zero, but no numeral
-//!   for, so it's not relevant here. Be sure to check your input values.
+//!   for, so it’s not relevant here. Be sure to check your input values.
 //! - Similarly, there is no *common* way to handle numbers in the tens of
 //!   thousands, which is why this library uses `i16`-sized integers. Numbers
 //!   in the tens of thousands will work, but will be prefixed with many, many
@@ -92,6 +93,7 @@ use std::fmt;
 
 use self::Numeral::*;
 
+
 /// An individual Roman numeral, without a given position.
 #[derive(PartialEq, Debug, Copy, Clone)]
 pub enum Numeral {
@@ -99,7 +101,7 @@ pub enum Numeral {
 }
 
 impl Numeral {
-    /// The value that this numeral is "worth". "Worth" is in scare quotes, as
+    /// The value that this numeral is “worth”. “Worth” is in scare quotes, as
     /// the value can change depending on its position in the string.
     pub fn value(&self) -> i16 {
         match *self {
@@ -138,6 +140,7 @@ impl Numeral {
     }
 }
 
+
 /// A sequence of Roman numerals.
 #[derive(PartialEq, Debug)]
 pub struct Roman {
@@ -147,7 +150,7 @@ pub struct Roman {
 impl Roman {
 
     /// Parses a string of characters into a sequence of numerals. Returns
-    /// `None` if there's a character in the input string that doesn't map to
+    /// `None` if there’s a character in the input string that doesn’t map to
     /// a numeral.
     ///
     /// This accepts either uppercase or lowercase ASCII characters.
@@ -169,7 +172,7 @@ impl Roman {
     /// ### Panics
     ///
     /// - This function panics when passed in a negative number or zero, as
-    ///   the Romans didn't have a way to write those down!
+    ///   the Romans didn’t have a way to write those down!
     pub fn value(&self) -> i16 {
         let mut total = 0;
         let mut max = 0;
@@ -241,6 +244,7 @@ impl From<i16> for Roman {
         Roman { numerals: vec }
     }
 }
+
 
 #[cfg(test)]
 mod test {

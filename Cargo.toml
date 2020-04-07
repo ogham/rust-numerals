@@ -2,8 +2,9 @@
 name = "numerals"
 description = "Library for numeric systems, both ancient and modern"
 
-authors = [ "ogham@bsago.me" ]
+authors = ["Benjamin Sago <ogham@bsago.me>"]
 documentation = "https://docs.rs/numerals"
+exclude = ["/README.md", "/LICENCE", "/.rustfmt.toml", "/.travis.yml"]
 homepage = "https://github.com/ogham/rust-numerals"
 license = "MIT"
 readme = "README.md"

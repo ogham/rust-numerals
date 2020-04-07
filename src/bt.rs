@@ -5,6 +5,7 @@ use std::fmt;
 
 use self::Trit::*;
 
+
 #[derive(PartialEq, Debug, Copy, Clone)]
 pub enum Trit {
     Minus, Zero, Plus
@@ -36,6 +37,7 @@ impl Trit {
         }
     }
 }
+
 
 pub struct BalancedTernary {
     trits: Vec<Trit>,
@@ -87,6 +89,7 @@ impl From<i64> for BalancedTernary {
         BalancedTernary { trits: trits }
     }
 }
+
 
 #[cfg(test)]
 mod test {
