@@ -28,7 +28,7 @@ impl Trit {
         }
     }
 
-    pub fn from_char(input: char) -> Option<Trit> {
+    pub fn from_char(input: char) -> Option<Self> {
         match input {
             '-' => Some(Minus),
             '0' => Some(Zero),
@@ -44,7 +44,7 @@ pub struct BalancedTernary {
 }
 
 impl BalancedTernary {
-    pub fn parse(input: &str) -> Option<BalancedTernary> {
+    pub fn parse(input: &str) -> Option<Self> {
         let mut trits = Vec::new();
 
         for c in input.chars() {
@@ -54,7 +54,7 @@ impl BalancedTernary {
             }
         }
 
-        Some(BalancedTernary { trits })
+        Some(Self { trits })
     }
 
     pub fn value(&self) -> i64 {
@@ -72,7 +72,7 @@ impl fmt::Display for BalancedTernary {
 }
 
 impl From<i64> for BalancedTernary {
-    fn from(mut input: i64) -> BalancedTernary {
+    fn from(mut input: i64) -> Self {
         let mut trits = Vec::new();
 
         while input != 0 {
@@ -86,7 +86,7 @@ impl From<i64> for BalancedTernary {
 
         trits.reverse();
 
-        BalancedTernary { trits }
+        Self { trits }
     }
 }
 

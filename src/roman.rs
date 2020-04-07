@@ -130,7 +130,7 @@ impl Numeral {
     /// one. Returns `None` otherwise.
     ///
     /// This accepts either uppercase or lowercase ASCII characters.
-    pub fn from_char(input: char) -> Option<Numeral> {
+    pub fn from_char(input: char) -> Option<Self> {
         match input {
             'I' | 'i' => Some(I),  'V' | 'v' => Some(V),
             'X' | 'x' => Some(X),  'L' | 'l' => Some(L),
@@ -154,7 +154,7 @@ impl Roman {
     /// a numeral.
     ///
     /// This accepts either uppercase or lowercase ASCII characters.
-    pub fn parse(input: &str) -> Option<Roman> {
+    pub fn parse(input: &str) -> Option<Self> {
         let mut numerals = Vec::new();
 
         for c in input.chars() {
@@ -164,7 +164,7 @@ impl Roman {
             }
         }
 
-        Some(Roman { numerals })
+        Some(Self { numerals })
     }
 
     /// Converts this string of numerals into a `i32` actual number.
@@ -209,13 +209,13 @@ impl fmt::UpperHex for Roman {
 }
 
 impl From<Vec<Numeral>> for Roman {
-    fn from(input: Vec<Numeral>) -> Roman {
-        Roman { numerals: input }
+    fn from(input: Vec<Numeral>) -> Self {
+        Self { numerals: input }
     }
 }
 
 impl From<i16> for Roman {
-    fn from(mut number: i16) -> Roman {
+    fn from(mut number: i16) -> Self {
         assert!(number > 0);
         let mut vec = Vec::new();
 
@@ -241,7 +241,7 @@ impl From<i16> for Roman {
             vec.push(I);
         }
 
-        Roman { numerals: vec }
+        Self { numerals: vec }
     }
 }
 
