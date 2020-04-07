@@ -64,9 +64,10 @@ impl BalancedTernary {
 
 impl fmt::Display for BalancedTernary {
     fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
-		for t in self.trits.iter() {
+		for t in &self.trits {
 		    write!(f, "{}", t.ascii())?;
 		}
+
 		Ok(())
 	}
 }
