@@ -12,16 +12,16 @@ pub enum Trit {
 }
 
 impl Trit {
-    fn value(&self) -> i64 {
-        match *self {
+    fn value(self) -> i64 {
+        match self {
             Minus => -1,
             Zero  => 0,
             Plus  => 1,
         }
     }
 
-    fn ascii(&self) -> char {
-        match *self {
+    fn ascii(self) -> char {
+        match self {
             Minus => '-',
             Zero  => '0',
             Plus  => '+',
@@ -54,7 +54,7 @@ impl BalancedTernary {
             }
         }
 
-        Some(BalancedTernary { trits: trits })
+        Some(BalancedTernary { trits })
     }
 
     pub fn value(&self) -> i64 {
@@ -86,7 +86,7 @@ impl From<i64> for BalancedTernary {
 
         trits.reverse();
 
-        BalancedTernary { trits: trits }
+        BalancedTernary { trits }
     }
 }
 

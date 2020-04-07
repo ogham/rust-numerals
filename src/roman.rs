@@ -103,8 +103,8 @@ pub enum Numeral {
 impl Numeral {
     /// The value that this numeral is “worth”. “Worth” is in scare quotes, as
     /// the value can change depending on its position in the string.
-    pub fn value(&self) -> i16 {
-        match *self {
+    pub fn value(self) -> i16 {
+        match self {
             I =>    1,  V =>   5,
             X =>   10,  L =>  50,
             C =>  100,  D => 500,
@@ -112,15 +112,15 @@ impl Numeral {
         }
     }
 
-    fn ascii_upper(&self) -> char {
-        match *self {
+    fn ascii_upper(self) -> char {
+        match self {
             I => 'I',  V => 'V',  X => 'X',  L => 'L',
             C => 'C',  D => 'D',  M => 'M',
         }
     }
 
-    fn ascii_lower(&self) -> char {
-        match *self {
+    fn ascii_lower(self) -> char {
+        match self {
             I => 'i',  V => 'v',  X => 'x',  L => 'l',
             C => 'c',  D => 'd',  M => 'm',
         }
@@ -164,7 +164,7 @@ impl Roman {
             }
         }
 
-        Some(Roman { numerals: numerals })
+        Some(Roman { numerals })
     }
 
     /// Converts this string of numerals into a `i32` actual number.
