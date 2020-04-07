@@ -189,7 +189,7 @@ impl Roman {
 impl fmt::LowerHex for Roman {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         for n in self.numerals.iter() {
-            try!(write!(f, "{}", n.ascii_lower()))
+            write!(f, "{}", n.ascii_lower())?
         }
         Ok(())
     }
@@ -198,8 +198,9 @@ impl fmt::LowerHex for Roman {
 impl fmt::UpperHex for Roman {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         for n in self.numerals.iter() {
-            try!(write!(f, "{}", n.ascii_upper()))
+            write!(f, "{}", n.ascii_upper())?;
         }
+
         Ok(())
     }
 }
