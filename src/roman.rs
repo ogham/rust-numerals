@@ -158,10 +158,7 @@ impl Roman {
         let mut numerals = Vec::new();
 
         for c in input.chars() {
-            match Numeral::from_char(c) {
-                Some(numeral)  => numerals.push(numeral),
-                None           => return None,
-            }
+			numerals.push(Numeral::from_char(c)?);
         }
 
         Some(Self { numerals })
@@ -196,10 +193,7 @@ impl Roman {
 
         for n in self.numerals.iter().map(|n| n.value()).rev() {
             let amount_to_add = if n >= max { n } else { -n };
-            match total.checked_add(amount_to_add) {
-                Some(result) => total = result,
-                None => return None,
-            }
+            total = total.checked_add(amount_to_add)?;
 
             if max < n {
                 max = n;
