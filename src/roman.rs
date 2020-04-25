@@ -231,15 +231,15 @@ impl fmt::UpperHex for Roman {
 }
 
 impl From<Vec<Numeral>> for Roman {
-    fn from(input: Vec<Numeral>) -> Self {
-        Self { numerals: input }
+    fn from(numerals: Vec<Numeral>) -> Self {
+        Self { numerals }
     }
 }
 
 impl From<i16> for Roman {
     fn from(mut number: i16) -> Self {
         assert!(number > 0);
-        let mut vec = Vec::new();
+        let mut numerals = Vec::new();
 
         for &(secondary, primary) in &[ (C, M), (C, D),
                                         (X, C), (X, L),
@@ -247,23 +247,23 @@ impl From<i16> for Roman {
 
             while number >= primary.value() {
                 number -= primary.value();
-                vec.push(primary);
+                numerals.push(primary);
             }
 
             let difference = primary.value() - secondary.value();
             if number >= difference {
                 number -= difference;
-                vec.push(secondary);
-                vec.push(primary);
+                numerals.push(secondary);
+                numerals.push(primary);
             }
         }
 
         while number > 0 {
             number -= 1;
-            vec.push(I);
+            numerals.push(I);
         }
 
-        Self { numerals: vec }
+        Self { numerals }
     }
 }
 
@@ -281,7 +281,7 @@ mod test {
 	        assert_eq!(Some(i), Roman::from(i).value_checked())
 	    }
     }
-    
+
     #[test]
     fn test_big_numbers() {
         for i in 32700 .. 32767 {
