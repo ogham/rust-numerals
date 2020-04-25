@@ -187,6 +187,27 @@ impl Roman {
 
         total
     }
+
+    /// Converts this string of numerals into a `i32` actual number.
+    /// Unlike `value`, this returns `None` on numbers that can't be converted to an `i32`.
+    pub fn value_checked(&self) -> Option<i16> {
+        let mut total: i16 = 0;
+        let mut max = 0;
+
+        for n in self.numerals.iter().map(|n| n.value()).rev() {
+            let amount_to_add = if n >= max { n } else { -n };
+            match total.checked_add(amount_to_add) {
+                Some(result) => total = result,
+                None => return None,
+            }
+
+            if max < n {
+                max = n;
+            }
+        }
+
+        Some(total)
+    }
 }
 
 impl fmt::LowerHex for Roman {
@@ -255,6 +276,37 @@ mod test {
 	fn test_many_numbers() {
 	    for i in 1 .. 4321 {
 	        assert_eq!(i, Roman::from(i).value())
+        }
+        for i in 1 .. 4321 {
+	        assert_eq!(Some(i), Roman::from(i).value_checked())
 	    }
-	}
+    }
+    
+    #[test]
+    fn test_big_numbers() {
+        for i in 32700 .. 32767 {
+	        assert_eq!(i, Roman::from(i).value());
+        }
+        for i in 32700 .. 32767 {
+	        assert_eq!(Some(i), Roman::from(i).value_checked());
+	    }
+    }
+
+    #[test]
+    fn value_checked_err_on_large() {
+        assert_eq!(
+            Roman::parse("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
+                .unwrap()
+                .value_checked(),
+            None
+        );
+    }
+
+    #[test]
+    #[should_panic]
+    fn value_panic_on_large() {
+        Roman::parse("MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM")
+            .unwrap()
+            .value();
+    }
 }
