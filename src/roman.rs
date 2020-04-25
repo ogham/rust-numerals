@@ -158,7 +158,7 @@ impl Roman {
         let mut numerals = Vec::new();
 
         for c in input.chars() {
-			numerals.push(Numeral::from_char(c)?);
+            numerals.push(Numeral::from_char(c)?);
         }
 
         Some(Self { numerals })
@@ -266,24 +266,24 @@ impl From<i16> for Roman {
 mod test {
     use super::*;
 
-	#[test]
-	fn test_many_numbers() {
-	    for i in 1 .. 4321 {
-	        assert_eq!(i, Roman::from(i).value())
+    #[test]
+    fn test_many_numbers() {
+        for i in 1 .. 4321 {
+            assert_eq!(i, Roman::from(i).value())
         }
         for i in 1 .. 4321 {
-	        assert_eq!(Some(i), Roman::from(i).value_checked())
-	    }
+            assert_eq!(Some(i), Roman::from(i).value_checked())
+        }
     }
 
     #[test]
     fn test_big_numbers() {
         for i in 32700 .. 32767 {
-	        assert_eq!(i, Roman::from(i).value());
+            assert_eq!(i, Roman::from(i).value());
         }
         for i in 32700 .. 32767 {
-	        assert_eq!(Some(i), Roman::from(i).value_checked());
-	    }
+            assert_eq!(Some(i), Roman::from(i).value_checked());
+        }
     }
 
     #[test]
