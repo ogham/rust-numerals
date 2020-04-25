@@ -3,7 +3,7 @@
 //! For more information, see the documentation for a particular module.
 
 #![warn(missing_copy_implementations)]
-//#![warn(missing_docs)]
+#![warn(missing_docs)]
 #![warn(nonstandard_style)]
 #![warn(trivial_numeric_casts)]
 #![warn(unreachable_pub)]

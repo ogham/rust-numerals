@@ -94,10 +94,30 @@ use std::fmt;
 use self::Numeral::*;
 
 
-/// An individual Roman numeral, without a given position.
+/// An individual Roman numeral, without a position.
 #[derive(PartialEq, Debug, Copy, Clone)]
 pub enum Numeral {
-    I, V, X, L, C, D, M,
+
+    /// The ‘Ⅰ’ numeral, representing 1.
+    I,
+
+    /// The ‘Ⅴ’ numeral, representing 5.
+    V,
+
+    /// The ‘Ⅹ’ numeral, representing 10.
+    X,
+
+    /// The ‘Ⅼ’ numeral, representing 50.
+    L,
+
+    /// The ‘C’ numeral, representing 100.
+    C,
+
+    /// The ‘Ⅾ’ numeral, representing 500.
+    D,
+
+    /// The ‘Ⅿ’ numeral, representing 1000.
+    M,
 }
 
 impl Numeral {

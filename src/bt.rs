@@ -1,5 +1,7 @@
 //! [Balanced ternary](https://en.wikipedia.org/wiki/Balanced_ternary)
 
+#![allow(missing_docs)]  // TODO
+
 use std::convert::From;
 use std::fmt;
 
